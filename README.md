@@ -7,7 +7,9 @@
 * 1일차 (개발환경 구축 및 학습 계획 수립)
 * 2일차 (Todo 프로그램 구현 및 반복문 학습)
 * 3일차 (클래스, 객체, 생성자, this 키워드 학습)
-  
+* 4일차 (toString(), List, 객체지향 방식 학습)
+* 5일차 (D1~D4 복습 및 객체지향 기초 예습)
+    
 ---
 
 # 1일차 (2026-06-23)
@@ -368,7 +370,153 @@ issue.start();
 * `status`를 Main에서 직접 변경하는 것이 아니라 `Issue` 객체의 `start()` 메서드를 호출하여 상태를 변경하면서 객체가 자신의 데이터를 직접 관리하는 객체지향적인 설계 방식을 이해하게 되었다.
 * 문법을 익히는 것뿐만 아니라 "객체에게 일을 시킨다."는 객체지향적인 사고방식을 배우는 시간이었다.
 
+---
 
+# 5일차 (2026-06-29)
 
+## 오늘 한 일
 
+* D1~D4 학습 내용 복습
+* Java 개발 환경(JDK, JRE, JVM, IntelliJ, Git) 개념 복습
+* Todo 프로그램을 처음부터 다시 구현하며 복습
+* `Array`와 `ArrayList`, `List`의 차이 학습
+* `List<Todo>`를 활용한 객체 저장 및 관리 복습
+* 클래스(Class), 객체(Object), 생성자(Constructor), `this` 키워드 개념 복습
+* `toString()` 메서드와 객체 출력 방식 복습
+* `private`, Getter, Setter의 필요성 예습
 
+## 배운 점
+
+### Java 실행 과정 복습
+
+* `javac`는 Java 소스코드를 Bytecode(`.class`)로 컴파일한다.
+* JVM이 Bytecode를 운영체제에 맞게 실행한다.
+* `new` 키워드는 객체를 생성할 때 사용한다.
+
+예시
+
+```java
+Todo todo = new Todo(1, "자바공부", false);
+```
+
+---
+
+### 배열(Array)과 리스트(List)
+
+배열
+
+```java
+String[] arr = new String[10];
+```
+
+* 크기가 고정된다.
+* `arr.length`로 크기를 확인한다.
+
+리스트
+
+```java
+List<String> list = new ArrayList<>();
+```
+
+* 크기가 자동으로 증가한다.
+* `add()`, `get()`, `remove()`, `size()` 등의 메서드를 사용할 수 있다.
+
+객체 저장
+
+```java
+List<Todo> todos = new ArrayList<>();
+```
+
+* 문자열이 아닌 `Todo` 객체를 저장할 수 있다.
+
+---
+
+### 클래스와 객체
+
+* 클래스는 객체를 만들기 위한 설계도이다.
+* `new`를 사용하면 클래스를 기반으로 객체가 생성된다.
+* 하나의 클래스로 여러 개의 객체를 생성할 수 있다.
+
+예시
+
+```java
+Todo todo1 = new Todo(1, "자바공부", false);
+Todo todo2 = new Todo(2, "운동", false);
+```
+
+---
+
+### 생성자와 this
+
+* 생성자는 객체 생성 시 자동으로 실행된다.
+* 객체의 필드를 초기화하는 역할을 한다.
+* `this`는 현재 객체 자신의 필드를 의미한다.
+
+예시
+
+```java
+Todo(int id, String title, boolean done) {
+    this.id = id;
+    this.title = title;
+    this.done = done;
+}
+```
+
+---
+
+### List와 객체
+
+* `List<Todo>`에는 문자열이 아니라 `Todo` 객체가 저장된다.
+* `add()`로 객체를 저장하고 반복문으로 객체를 순회할 수 있다.
+
+예시
+
+```java
+for (Todo todo : todos) {
+    System.out.println(todo);
+}
+```
+
+---
+
+### toString()
+
+* `System.out.println(todo)`를 호출하면 내부적으로 `todo.toString()`이 실행된다.
+* `toString()`을 오버라이드하면 객체를 원하는 형식으로 출력할 수 있다.
+
+예시
+
+```java
+@Override
+public String toString() {
+    return id + " | " + title + " | " + done;
+}
+```
+
+---
+
+### 접근 제어자와 Getter/Setter (예습)
+
+* `private`을 사용하면 외부에서 필드에 직접 접근할 수 없다.
+* Getter는 값을 읽기 위한 메서드이다.
+* Setter는 값을 변경하기 위한 메서드이다.
+* 읽기만 허용하고 싶은 경우 Getter만 만들고 Setter는 만들지 않을 수도 있다.
+
+예시
+
+```java
+private int id;
+
+public int getId() {
+    return id;
+}
+```
+
+## 느낀 점
+
+* D1~D4 내용을 처음부터 다시 구현하면서 잊어버렸던 내용을 하나씩 떠올릴 수 있었다.
+* 처음에는 클래스와 객체가 헷갈렸지만, 설계도와 실제 객체의 관계를 다시 정리하면서 이해가 더욱 명확해졌다.
+* `List<Todo>`가 문자열이 아니라 객체를 저장한다는 개념과 `new`를 통한 객체 생성 과정을 연결해서 이해할 수 있었다.
+* `toString()`이 객체를 문자열로 표현하는 역할이라는 점을 다시 확인했고, 앞으로 배울 `private`, Getter, Setter가 객체지향 설계에서 왜 필요한지도 미리 이해할 수 있었다.
+
+---
