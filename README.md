@@ -9,6 +9,7 @@
 * 3일차 (클래스, 객체, 생성자, this 키워드 학습)
 * 4일차 (toString(), List, 객체지향 방식 학습)
 * 5일차 (D1~D4 복습 및 객체지향 기초 예습)
+* 6일차 (D1~D5 복습 및 Todo 프로그램 직접 구현)
     
 ---
 
@@ -520,3 +521,153 @@ public int getId() {
 * `toString()`이 객체를 문자열로 표현하는 역할이라는 점을 다시 확인했고, 앞으로 배울 `private`, Getter, Setter가 객체지향 설계에서 왜 필요한지도 미리 이해할 수 있었다.
 
 ---
+
+# 6일차 (2026-06-30)
+
+## 오늘 한 일
+
+* D1~D5 학습 내용 복습
+* 클래스(Class), 객체(Object), 생성자(Constructor), `this` 개념 설명 연습
+* `Todo` 클래스 직접 구현
+* `toString()` 오버라이드 복습
+* `List<Todo>`를 이용한 객체 관리 복습
+* `Scanner`를 이용한 메뉴 선택 기능 구현
+* Todo 등록 기능 구현
+* Todo 목록 조회 기능 구현
+* Todo 삭제 기능 구현
+* 일반 `for`문과 향상된 `for`문의 사용 목적 비교
+* 사용자 입력 번호와 리스트 인덱스의 차이 학습
+
+## 배운 점
+
+### Todo 클래스 구현
+
+* `Todo` 클래스를 직접 작성하며 필드, 생성자, `toString()`을 구현하였다.
+* 생성자는 객체 생성 시 필드를 초기화하는 역할을 한다.
+* `this`를 사용하여 필드와 매개변수를 구분하였다.
+
+예시
+
+```java
+public class Todo {
+
+    String title;
+    boolean done;
+
+    Todo(String title, boolean done) {
+        this.title = title;
+        this.done = done;
+    }
+
+    @Override
+    public String toString() {
+        return title + " : " + done;
+    }
+}
+```
+
+---
+
+### List를 이용한 객체 관리
+
+* `List<Todo>`를 생성하여 여러 개의 Todo 객체를 저장하였다.
+* `add()`를 이용해 객체를 추가하고 반복문으로 목록을 출력하였다.
+
+예시
+
+```java
+List<Todo> todos = new ArrayList<>();
+
+todos.add(new Todo("자바공부", false));
+```
+
+---
+
+### Scanner를 이용한 메뉴 구현
+
+* `while`문을 이용하여 프로그램이 종료될 때까지 반복하도록 구현하였다.
+* `Scanner`로 사용자의 메뉴 선택을 입력받아 기능을 분기하였다.
+
+예시
+
+```java
+while (true) {
+
+    System.out.println("""
+            1. 등록
+            2. 목록
+            3. 삭제
+            4. 종료
+            """);
+
+    int menu = scanner.nextInt();
+
+    ...
+}
+```
+
+---
+
+### 일반 for문과 향상된 for문
+
+향상된 `for`문
+
+```java
+for (Todo todo : todos) {
+    System.out.println(todo);
+}
+```
+
+* 객체를 하나씩 순회할 때 코드가 간결하다.
+* 인덱스를 사용할 수 없다.
+
+일반 `for`문
+
+```java
+for (int i = 0; i < todos.size(); i++) {
+    System.out.println((i + 1) + ". " + todos.get(i));
+}
+```
+
+* 인덱스를 사용할 수 있다.
+* 번호 출력, 수정, 삭제 기능 구현에 적합하다.
+
+---
+
+### 리스트 인덱스와 사용자 번호
+
+* 리스트의 인덱스는 0부터 시작한다.
+* 사용자에게는 1번부터 보여주는 것이 자연스럽다.
+* 따라서 사용자 입력 번호를 리스트 인덱스로 변환해야 한다.
+
+예시
+
+```java
+int num = scanner.nextInt();
+todos.remove(num - 1);
+```
+
+---
+
+### 객체 출력과 `toString()`
+
+* `System.out.println(todo)`를 호출하면 내부적으로 `toString()`이 실행된다.
+* 객체의 출력 형식은 `toString()`에서 관리하는 것이 객체지향적인 방식이다.
+
+예시
+
+```java
+System.out.println(todo);
+```
+
+## 느낀 점
+
+* 멘토의 도움 없이 Todo 프로그램을 처음부터 다시 구현하면서 지금까지 배운 내용을 스스로 떠올리는 연습을 할 수 있었다.
+* 단순히 문법을 암기하는 것보다 객체를 생성하고 `List`에 저장하며 프로그램을 직접 구현하는 과정에서 개념이 더욱 명확해졌다.
+* 일반 `for`문과 향상된 `for`문의 차이를 실제 기능 구현에 적용해 보면서 각각의 사용 목적을 이해할 수 있었다.
+* 삭제 기능을 구현하는 과정에서 사용자에게 보여주는 번호와 리스트의 인덱스가 다르다는 점을 직접 경험하며 인덱스 개념을 확실히 익힐 수 있었다.
+* 앞으로도 정답을 바로 확인하기보다 먼저 스스로 구현하고 고민한 뒤 부족한 부분을 보완하는 방식으로 학습을 이어가고 싶다.
+
+---
+
+
